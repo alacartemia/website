@@ -119,13 +119,42 @@
   /* Contact form (Netlify) */
   const contactForm = document.querySelector(".contact-form");
   const formMsg = document.querySelector("[data-form-message]");
+  const contactModal = document.querySelector("[data-contact-modal]");
+  let contactModalTrigger = null;
+
+  function openContactModal() {
+    if (!contactModal) return;
+    contactModalTrigger = document.activeElement;
+    contactModal.hidden = false;
+    contactModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("contact-modal-open");
+    contactModal.querySelector(".contact-modal__btn")?.focus();
+  }
+
+  function closeContactModal() {
+    if (!contactModal) return;
+    contactModal.hidden = true;
+    contactModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("contact-modal-open");
+    contactModalTrigger?.focus();
+  }
+
+  contactModal?.querySelectorAll("[data-contact-modal-close]").forEach((el) => {
+    el.addEventListener("click", closeContactModal);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && contactModal && !contactModal.hidden) {
+      closeContactModal();
+    }
+  });
 
   function showContactSuccess() {
-    if (!formMsg) return;
-    formMsg.textContent = "Thank you — your message has been sent.";
-    formMsg.classList.add("is-visible", "form-message--success");
-    formMsg.classList.remove("form-message--error");
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (formMsg) {
+      formMsg.textContent = "";
+      formMsg.classList.remove("is-visible", "form-message--success", "form-message--error");
+    }
+    openContactModal();
   }
 
   function showContactError() {
@@ -133,13 +162,6 @@
     formMsg.textContent = "Something went wrong. Please try again or email us directly.";
     formMsg.classList.add("is-visible", "form-message--error");
     formMsg.classList.remove("form-message--success");
-  }
-
-  if (sessionStorage.getItem("contactSent") === "1") {
-    sessionStorage.removeItem("contactSent");
-    showContactSuccess();
-  } else if (new URLSearchParams(window.location.search).get("sent") === "1") {
-    showContactSuccess();
   }
 
   if (contactForm) {
@@ -155,11 +177,13 @@
       })
         .then((res) => {
           if (!res.ok) throw new Error("Form submission failed");
-          sessionStorage.setItem("contactSent", "1");
-          window.location.href = "/#contact";
+          contactForm.reset();
+          showContactSuccess();
         })
         .catch(() => {
           showContactError();
+        })
+        .finally(() => {
           submitBtn?.removeAttribute("disabled");
         });
     });
