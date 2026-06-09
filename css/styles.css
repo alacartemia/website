@@ -571,6 +571,17 @@ a:hover { opacity: 0.78; }
   transform: scale(1.03);
 }
 
+/* 6th food tile — mobile 2×3 grid only; hidden on desktop mosaic */
+.gallery-grid--food > .gallery-grid__item--mobile-only {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .gallery-grid--food > .gallery-grid__item--mobile-only {
+    display: block;
+  }
+}
+
 @media (min-width: 768px) {
   .gallery-grid {
     grid-template-columns: repeat(4, 1fr);
