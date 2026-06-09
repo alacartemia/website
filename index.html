@@ -263,7 +263,7 @@
           <h2 class="section__title" id="contact-title">Get in touch</h2>
           <p class="section__lead">Questions or catering inquiries? Send us a message.</p>
         </header>
-        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?sent=1">
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" action="/">
           <input type="hidden" name="form-name" value="contact">
           <p class="hidden">
             <label>Don’t fill this out: <input name="bot-field"></label>
@@ -275,6 +275,10 @@
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone <span class="form-optional">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
           </div>
           <div class="form-group">
             <label for="message">Message</label>
@@ -328,6 +332,14 @@
       <button type="button" data-a11y-action="reset">Reset settings</button>
     </div>
   </div>
+
+  <!-- Static copy for Netlify Forms build-time detection -->
+  <form name="contact" data-netlify="true" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <input type="tel" name="phone">
+    <textarea name="message"></textarea>
+  </form>
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   <script src="/js/main.js" defer></script>

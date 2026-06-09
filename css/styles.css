@@ -797,6 +797,11 @@ html.a11y-reduce-motion .interior-scroll {
   font-weight: 600;
 }
 
+.form-optional {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
 .form-group input,
 .form-group textarea {
   width: 100%;

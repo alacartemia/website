@@ -116,12 +116,53 @@
     }
   });
 
-  /* Contact form feedback (Netlify) */
-  const params = new URLSearchParams(window.location.search);
+  /* Contact form (Netlify) */
+  const contactForm = document.querySelector(".contact-form");
   const formMsg = document.querySelector("[data-form-message]");
-  if (params.get("sent") === "1" && formMsg) {
+
+  function showContactSuccess() {
+    if (!formMsg) return;
     formMsg.textContent = "Thank you — your message has been sent.";
     formMsg.classList.add("is-visible", "form-message--success");
+    formMsg.classList.remove("form-message--error");
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function showContactError() {
+    if (!formMsg) return;
+    formMsg.textContent = "Something went wrong. Please try again or email us directly.";
+    formMsg.classList.add("is-visible", "form-message--error");
+    formMsg.classList.remove("form-message--success");
+  }
+
+  if (sessionStorage.getItem("contactSent") === "1") {
+    sessionStorage.removeItem("contactSent");
+    showContactSuccess();
+  } else if (new URLSearchParams(window.location.search).get("sent") === "1") {
+    showContactSuccess();
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('[type="submit"]');
+      submitBtn?.setAttribute("disabled", "disabled");
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(contactForm)).toString(),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Form submission failed");
+          sessionStorage.setItem("contactSent", "1");
+          window.location.href = "/#contact";
+        })
+        .catch(() => {
+          showContactError();
+          submitBtn?.removeAttribute("disabled");
+        });
+    });
   }
 
   /* Interior gallery scroll */
