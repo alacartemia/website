@@ -127,27 +127,41 @@ Site uses **1000×1500** WebP thumbs for scroll performance. Naming: add `-` bef
 
 ---
 
-## `Food/` (14 JPG) — food grid fallbacks
+## `Food/` (legacy JPG — optional archive)
 
-All 1024px wide. Used as `<img>` fallback inside `<picture>` with Food2 WebP `source`.
+Food section now uses **Food2 `*-.webp` only** (no JPG fallback in `index.html`).
 
-| Active in grid | WebP source (Food2) |
-|----------------|---------------------|
-| alacarte8131.jpg | `ALC  - Dec 2025 - 4.webp` |
-| alacarte8106.jpg | `ALC - Dec 2025 - EXT5.webp` |
-| alacarte8149.jpg | `ALC - Dec 2025 - EXT4.webp` |
-| alacarte8117.jpg | `ALC  - Dec 2025 - 7.webp` |
-| alacarte8120.jpg | `ALC  - Dec 2025 - 11.webp` |
-
-**Featured spread:** `Food2/A la Carte - Nov 2025 - 35.webp`
-
-**Food mosaic CSS:** desktop 2×2 large tile + 4 small cells; `container-type: inline-size` + `100cqi` for alignment.
+This folder can be deleted after confirming no other references, or kept locally as archive.
 
 ---
 
-## `Food2/` (15 WebP)
+## `Food2/` (15 WebP @ web size)
 
-See prior inventory. `EXT*` = drinks/counter, **not** building exterior.
+All files use **`-` suffix** before `.webp` (web-optimized; masters removed).
+
+| Dimensions | Files |
+|------------|-------|
+| **2500×1667** | `A la Carte - Nov 2025 - 35-.webp` — featured spread |
+| **1200×1800** | All other `Food2/*-.webp` (mosaic + swap options) |
+
+### Active in `index.html`
+
+| File | Section |
+|------|---------|
+| `A la Carte - Nov 2025 - 35-.webp` | Featured |
+| `ALC  - Dec 2025 - 4-.webp` | Mosaic |
+| `ALC - Dec 2025 - EXT5-.webp` | Mosaic |
+| `ALC - Dec 2025 - EXT4-.webp` | Mosaic |
+| `ALC  - Dec 2025 - 7-.webp` | Mosaic |
+| `ALC  - Dec 2025 - 11-.webp` | Mosaic |
+
+### Reserve (swap options, not in HTML)
+
+`LS - 0/3/17/19-.webp`, `ALC  - Dec 2025 - 6/8/12/14-.webp`, `ALC - Dec 2025 - EXT1-.webp`
+
+**Filename quirk:** `ALC  -` = two spaces; `ALC -` = one space (EXT files).
+
+`EXT*` = drinks/counter, **not** building exterior.
 
 ---
 
