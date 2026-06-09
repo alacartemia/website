@@ -1,0 +1,13 @@
+{
+  "name": "alacartemia",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "preview": "serve -l 8765 --no-port-switching .",
+    "preview:static": "serve -l 8765 --no-port-switching ."
+  },
+  "devDependencies": {
+    "netlify-cli": "^22.1.0",
+    "serve": "^14.2.4"
+  }
+}

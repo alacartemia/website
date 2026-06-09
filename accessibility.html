@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility Statement | Á La Carte Miami</title>
+  <link rel="icon" href="/assets/favicon/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div aria-hidden="true"></div>
+      <a class="site-header__logo" href="/"><img src="/assets/Logo/logo-white.png" alt="" width="180" height="48"></a>
+      <div class="site-header__actions"><a class="btn btn--primary" href="/">Home</a></div>
+    </div>
+  </header>
+  <main id="main" class="page-legal container">
+    <h1>Accessibility Statement</h1>
+    <p class="page-legal__updated">Last updated: June 2026</p>
+
+    <h2>Our commitment</h2>
+    <p>Á La Carte Miami is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience for everyone and apply relevant accessibility standards.</p>
+
+    <h2>Conformance status</h2>
+    <p>We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. This website includes:</p>
+    <ul>
+      <li>Semantic HTML structure and descriptive headings</li>
+      <li>Keyboard navigation support</li>
+      <li>Visible focus indicators on interactive elements</li>
+      <li>Alternative text for meaningful images</li>
+      <li>An accessibility toolbar (text size, contrast, link highlighting, reduced motion)</li>
+      <li>Skip to main content link</li>
+    </ul>
+
+    <h2>Accessibility toolbar</h2>
+    <p>Use the accessibility button at the bottom-left of every page to adjust text size, enable high contrast, highlight links, or reduce motion. Settings are saved in your browser.</p>
+
+    <h2>Known limitations</h2>
+    <p>Some third-party content (such as embedded maps) may not fully meet accessibility standards. We are working to improve these integrations.</p>
+
+    <h2>Feedback</h2>
+    <p>If you encounter accessibility barriers on this site, please contact us:</p>
+    <ul>
+      <li>Email: <a href="mailto:info@alacartemia.com">info@alacartemia.com</a></li>
+      <li><a href="/#contact">Contact form</a></li>
+    </ul>
+    <p>We try to respond within 5 business days.</p>
+
+    <p style="margin-top:2rem"><a href="/">← Back to home</a></p>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__copy">&copy; Á La Carte Miami</p>
+    </div>
+  </footer>
+  <script src="/js/main.js" defer></script>
+  <div class="a11y-toolbar">
+    <button class="a11y-toolbar__toggle" type="button" data-a11y-toggle aria-expanded="false" aria-controls="a11y-panel" aria-label="Accessibility options">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a2 2 0 100 4 2 2 0 000-4zM7.05 9.45a1 1 0 00-.9 1.78L9 12.64V20a1 1 0 102 0v-7.36l2.85-1.41a1 1 0 00-.9-1.78l-2.95 1.46-2.95-1.46z"/></svg>
+    </button>
+    <div class="a11y-toolbar__panel" id="a11y-panel" data-a11y-panel role="region" aria-label="Accessibility settings">
+      <h2>Accessibility</h2>
+      <button type="button" data-a11y-action="text-lg">Increase text size</button>
+      <button type="button" data-a11y-action="text-xl">Increase text more</button>
+      <button type="button" data-a11y-action="contrast">High contrast</button>
+      <button type="button" data-a11y-action="links">Highlight links</button>
+      <button type="button" data-a11y-action="motion">Reduce motion</button>
+      <button type="button" data-a11y-action="reset">Reset settings</button>
+    </div>
+  </div>
+</body>
+</html>

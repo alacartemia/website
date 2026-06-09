@@ -1,0 +1,27 @@
+A La Carte Miami — Brand Colors
+================================
+
+Primary (Navy Blue)
+  Hex: #171842
+  Use: Header bar, buttons (ORDER NOW), accents, text on light bg
+
+Background / Light (Cream)
+  Hex: #FFF3D2
+  Use: Site background, light sections, text on dark bg
+
+Notes
+-----
+- Header top strip: #171842
+- Body background: #FFF3D2
+- Verify contrast for WCAG AA (navy text on cream, cream text on navy)
+
+Reference asset (NOT logo — brand sticker only)
+  assets/alc_sticker_page_1.png
+  → Favicon will be derived from this sticker (client to provide or we crop/export)
+
+Still needed
+  favicon.ico  — export from assets/Logo/logo-icon-blue.png (or icon-white on navy tile)
+
+Logo (header)
+  assets/Logo/logo-white.png  on navy header #171842
+  assets/Logo/logo-blue.png   on cream background #FFF3D2
