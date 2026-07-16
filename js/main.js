@@ -70,6 +70,43 @@
 
   applyA11y(saved);
 
+  const heroMobileVideo = document.querySelector(".hero__mobile video");
+
+  function syncHeroMobileVideo() {
+    if (!heroMobileVideo) return;
+    const reduceMotion = document.documentElement.classList.contains("a11y-reduce-motion");
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const source = heroMobileVideo.querySelector("source");
+    const poster = "/assets/hero/hero-poster-mobile.webp";
+
+    if (reduceMotion || !isMobile) {
+      heroMobileVideo.pause();
+      if (source?.getAttribute("src")) {
+        source.dataset.src = source.getAttribute("src");
+        source.removeAttribute("src");
+      }
+      heroMobileVideo.removeAttribute("poster");
+      heroMobileVideo.load();
+      return;
+    }
+
+    if (source && !source.getAttribute("src") && source.dataset.src) {
+      source.src = source.dataset.src;
+    }
+    if (!heroMobileVideo.getAttribute("poster")) {
+      heroMobileVideo.setAttribute("poster", poster);
+    }
+    heroMobileVideo.muted = true;
+    heroMobileVideo.play().catch(() => {});
+  }
+
+  if (heroMobileVideo) {
+    heroMobileVideo.addEventListener("loadeddata", syncHeroMobileVideo);
+  }
+
+  syncHeroMobileVideo();
+  window.addEventListener("resize", syncHeroMobileVideo);
+
   a11yToggle?.addEventListener("click", () => {
     const open = a11yPanel?.classList.toggle("is-open");
     a11yToggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -103,6 +140,7 @@
           break;
       }
       applyA11y(current);
+      syncHeroMobileVideo();
     });
   });
 
@@ -189,48 +227,4 @@
     });
   }
 
-  /* Interior gallery scroll */
-  const interiorScroll = document.getElementById("interior-scroll");
-  const interiorPrev = document.querySelector("[data-interior-prev]");
-  const interiorNext = document.querySelector("[data-interior-next]");
-
-  function interiorScrollStep() {
-    const item = interiorScroll?.querySelector(".interior-scroll__item");
-    if (!item || !interiorScroll) return 280;
-    const styles = getComputedStyle(interiorScroll);
-    const gap = parseFloat(styles.columnGap || styles.gap) || 16;
-    return item.offsetWidth + gap;
-  }
-
-  function scrollBehavior() {
-    return document.documentElement.classList.contains("a11y-reduce-motion")
-      ? "auto"
-      : "smooth";
-  }
-
-  function updateInteriorNav() {
-    if (!interiorScroll || !interiorPrev || !interiorNext) return;
-    const { scrollLeft, scrollWidth, clientWidth } = interiorScroll;
-    const maxScroll = scrollWidth - clientWidth;
-    interiorPrev.disabled = scrollLeft <= 2;
-    interiorNext.disabled = maxScroll <= 2 || scrollLeft >= maxScroll - 2;
-  }
-
-  interiorPrev?.addEventListener("click", () => {
-    interiorScroll?.scrollBy({
-      left: -interiorScrollStep(),
-      behavior: scrollBehavior(),
-    });
-  });
-
-  interiorNext?.addEventListener("click", () => {
-    interiorScroll?.scrollBy({
-      left: interiorScrollStep(),
-      behavior: scrollBehavior(),
-    });
-  });
-
-  interiorScroll?.addEventListener("scroll", updateInteriorNav, { passive: true });
-  window.addEventListener("resize", updateInteriorNav);
-  updateInteriorNav();
 })();
