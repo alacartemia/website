@@ -290,10 +290,8 @@ a:hover { opacity: 0.78; }
   .site-header__menu-btn { display: flex; }
   .site-header__actions .btn--primary { display: none; }
   .site-header__inner {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto 1fr;
   }
-  .site-header__logo { grid-column: 2; }
-  .site-header__actions { grid-column: 3; }
 }
 
 /* Hero */
