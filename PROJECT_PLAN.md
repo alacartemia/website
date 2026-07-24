@@ -45,6 +45,7 @@
 12. [Checklist Launch / העברה ללקוח](#checklist-launch--העברה-ללקוח)
 13. [מה לא כלול](#מה-לא-כלול)
 14. [הערכת זמן (פנימית)](#הערכת-זמן-פנימית)
+15. [יומן שינויים](#יומן-שינויים)
 
 ---
 
@@ -64,7 +65,9 @@
 | **Hero video** | TBD — poster slots ready |
 | **Assets map** | `ASSETS_MAP.md` — full inventory + build mapping |
 | **Favicon** | `assets/favicon/` ✓ (favicon.io + webmanifest) |
-| **Site build** | Phase 1 ✓ — pending deploy |
+| **Site build** | Phase 1 ✓ — **deployed** (Netlify staging; DNS pending) |
+| **GitHub** | ✓ `alacartemia/website` → `main` |
+| **Changelog** | `CHANGELOG.md` — יומן שינויים מלא |
 
 ---
 
@@ -105,9 +108,9 @@ https://order.toasttab.com/online/a-la-carte-613-w-hallandale-beach-blvd
 | סקשן | תיקייה | קובץ מוביל |
 |------|--------|------------|
 | **Community / App** | `working/` | `ALC0047 copy.webp` (barista + apron) |
-| **Food featured** | `Food2/` | `Nov 2025 - 35.webp` (landscape spread) |
-| **Food grid** | `Food/` + `Food2/` | 14 JPG + Dec dishes WebP |
-| **Our Space** | `interior/` | 7 gallery thumbs `*-.webp` @ 1000×1500 + scroll arrows |
+| **Food featured** | `Food2/` | `A la Carte - Nov 2025 - 35-.webp` (2500×1667) |
+| **Food grid** | `Food2/` | 6 WebP `*-.webp` — 5 desktop + 1 mobile-only |
+| **Our Space** | `interior/` | 7 gallery thumbs `*-.webp` @ 1000×1500 |
 
 ### Community / App ✓
 - `working/ALC0047 copy.webp`
@@ -115,14 +118,15 @@ https://order.toasttab.com/online/a-la-carte-613-w-hallandale-beach-blvd
 - Mobile: centered buttons in `section--alt`
 
 ### Food ✓
-- Featured: `Food2/Nov 2025 - 35.webp`
-- Mosaic grid: 5 cells + desktop 2×2 large tile (CSS `100cqi`)
-- Bugfix: Food2 paths — `ALC  -` (2 spaces) vs `ALC -` (1 space) for EXT files
+- Featured: `Food2/A la Carte - Nov 2025 - 35-.webp` (2500×1667)
+- Mosaic: 5 cells desktop (CSS `100cqi` large tile) + **6th tile mobile only** (`12-.webp`)
+- WebP only — no JPG fallback in HTML
+- Food2 naming: `ALC  -` (2 spaces) vs `ALC -` (1 space) for EXT files
+- 9 reserve files in `Food2/` for future swaps
 
 ### Interior / Our Space ✓
 - Horizontal scroll gallery + prev/next nav + styled scrollbar
-- Gallery uses reduced thumbs (`3-.webp` … `Int --.webp`) for performance
-- Masters (3.4k–5.8k px) kept alongside for phase 2 / print
+- Gallery: 7 thumbs only (`3-.webp` … `Int --.webp`) — masters removed from repo
 
 ### Locations ✓
 | מיקום | פרטים |
@@ -132,7 +136,15 @@ https://order.toasttab.com/online/a-la-carte-613-w-hallandale-beach-blvd
 | **מפה** | Google Maps embed / קישור |
 
 ### Contact ✓
-- Netlify Forms → `/?sent=1` success message
+- **Netlify Forms** — form name: `contact`
+- שדות: Name, Email, **Phone (optional)**, Message
+- שליחה: `fetch` POST ב-`js/main.js` → `action="/"`
+- אישור: **modal popup** (`.contact-modal`) — ללא reload
+- hidden form ל-build-time detection
+- **Localhost:** טופס לא עובד (501) — לבדוק רק ב-Netlify live
+- Dashboard: Form detection enabled; להגדיר **email notifications**
+
+> פירוט: **`CHANGELOG.md`**
 
 ### Footer ✓
 - Instagram: https://www.instagram.com/alacartemia
@@ -201,7 +213,7 @@ https://order.toasttab.com/online/a-la-carte-613-w-hallandale-beach-blvd
 ```
 index.html          — one-page site
 css/styles.css      — design system
-js/main.js          — nav, Toast links, a11y, interior scroll, form feedback
+js/main.js          — nav, Toast, a11y, interior scroll, Netlify form + success modal
 privacy.html
 accessibility.html
 404.html
@@ -394,17 +406,15 @@ ALACARTE/
 ├── js/main.js                ✓
 ├── scripts/build_privacy.py  ✓
 ├── assets/
-│   ├── hero/
-│   │   ├── hero-poster3.webp       ✓ active desktop
-│   │   ├── hero-poster-mobile.webp  ✓ active mobile
-│   │   └── hero-poster*.webp        alts / legacy
-│   ├── interior/             7 masters + 7 *-.webp gallery
-│   ├── Food/                 14 JPG
-│   ├── Food2/                15 WebP
-│   ├── working/              6 WebP
+│   ├── hero/                 2 WebP (poster3 + mobile)
+│   ├── interior/             7 gallery thumbs (*-.webp)
+│   ├── Food2/               15 WebP (*-.webp — 6 active + 9 reserve)
+│   ├── Food/                 5 JPG (archive — not in HTML)
+│   ├── working/              1 WebP (ALC0047)
 │   ├── Logo/                 ✓
 │   ├── favicon/              ✓
 │   └── colors.txt            ✓
+├── CHANGELOG.md              ✓ deploy + form + assets log
 ├── ASSETS_MAP.md
 ├── PROJECT_PLAN.md
 └── design-system/MASTER.md
@@ -462,9 +472,10 @@ ALACARTE/
 □ Food + Interior galleries ✓
 □ קישור Toast ✓ (js/main.js)
 □ קישור אפליקציה — coming soon placeholders
-□ אתר phase 1 ✓ built locally
-□ GitHub repo — pending
-□ Netlify + DNS — pending
+□ אתר phase 1 ✓ built + deployed (Netlify staging)
+□ GitHub repo ✓ alacartemia/website
+□ Netlify Forms ✓ contact — configure email notifications
+□ Netlify + DNS — DNS pending (alacartemia.com)
 □ גישה DNS → alacartemia.com
 □ חשבון Google: info@alacartemia.com (לשלב 2)
 ```
@@ -569,6 +580,22 @@ ALACARTE/
 | Contact / Google | info@alacartemia.com |
 | Netlify Pricing | https://www.netlify.com/pricing/ |
 | Netlify Support (Site Transfer) | https://www.netlify.com/support/ |
+| GitHub repo | https://github.com/alacartemia/website |
+
+---
+
+## יומן שינויים
+
+> **`CHANGELOG.md`** — מסמך מלא: commits, assets, טופס, Netlify, באגים, checklist.
+
+| תאריך | עדכון |
+|-------|--------|
+| יוני 2026 | Phase 1 build — אתר one-page מלא |
+| יוני 2026 | Git push → `alacartemia/website` |
+| יוני 2026 | Netlify deploy + Forms (`contact`) |
+| יוני 2026 | Asset cleanup + Food2 `*-.webp` web size |
+| יוני 2026 | Mobile food tile #6 |
+| יוני 2026 | Contact: phone field, form fix, success modal |
 
 ---
 

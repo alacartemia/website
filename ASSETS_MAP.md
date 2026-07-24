@@ -1,6 +1,7 @@
 # Assets Map — A La Carte Miami
 
-> **Status:** Phase 1 **built** — June 2026 (pending Netlify deploy + DNS)  
+> **Status:** Phase 1 **deployed** — June 2026 (Netlify staging live; DNS pending)  
+> **Changelog:** `CHANGELOG.md` — full history of post-build changes  
 > **Site files:** `index.html`, `css/styles.css`, `js/main.js`, `privacy.html`, `accessibility.html`, `404.html`, `netlify.toml`
 
 ---
@@ -9,16 +10,15 @@
 
 ```
 assets/
-├── hero/           5+ files  — desktop + mobile hero covers
-├── interior/      14 files  — 7 masters + 7 gallery thumbs (*-.webp)
-├── Food/          14 files  — food grid (JPG fallbacks)
-├── Food2/         15 files  — food & lifestyle masters (WebP)
-├── working/        6 files  — community / barista (WebP)
-├── Logo/           4 PNG   — header/footer logos
-├── Logo/social/    4 PNG   — OG / share (pre-composed)
-├── favicon/        ✓       — favicon.io package + site.webmanifest
-├── colors.txt
-└── alc_sticker_*.png (reference only)
+├── hero/           2 files  — poster3 (desktop) + mobile
+├── interior/       7 files  — gallery thumbs only (*-.webp)
+├── Food2/         15 files  — all web size (*-.webp)
+├── Food/           5 JPG    — archive (not used in HTML)
+├── working/        1 file   — ALC0047 copy.webp
+├── Logo/           4 PNG    — header/footer logos
+├── Logo/social/    4 PNG    — OG / share (pre-composed)
+├── favicon/        ✓        — favicon.io package + site.webmanifest
+└── colors.txt
 ```
 
 ---
@@ -41,14 +41,14 @@ assets/
 │ COMMUNITY — working/ALC0047 copy.webp   │
 │   App Store / Google Play — coming soon │
 ├─────────────────────────────────────────┤
-│ FOOD — Food2 featured + 5-cell mosaic   │
+│ FOOD — Food2 featured + mosaic (5 desktop / 6 mobile) │
 ├─────────────────────────────────────────┤
 │ INTERIOR — horizontal gallery + arrows  │
 │   7 thumbs @ 1000×1500 (*-.webp)        │
 ├─────────────────────────────────────────┤
 │ LOCATIONS — Hallandale + map + Bay Harbor│
 ├─────────────────────────────────────────┤
-│ CONTACT — Netlify form                  │
+│ CONTACT — Netlify form + success modal  │
 ├─────────────────────────────────────────┤
 │ FOOTER — social, Privacy, Accessibility │
 │ A11Y toolbar — fixed bottom-left        │
@@ -72,7 +72,7 @@ assets/
 | Folder | Format | Notes |
 |--------|--------|-------|
 | hero, interior (gallery), Food2, working | `.webp` | Primary |
-| Food | `.jpg` | `<picture>` fallback in food grid |
+| Food | `.jpg` | Archive only — not in live HTML |
 | Logo | `.png` | Transparent |
 
 **URL encoding:** paths with spaces use `%20` in HTML (e.g. `ALC%20%20-%20Dec%202025%20-%20Int%20-%203-.webp`).
@@ -87,9 +87,8 @@ assets/
 |------|------|------------|-----|
 | **hero-poster3.webp** | ~192 KB | 3612×1344 (~21:9) | **Active desktop hero** |
 | **hero-poster-mobile.webp** | ~97 KB | 1536×2752 (9:16) | **Active mobile hero** (`max-width: 767px`) |
-| hero-poster2.webp | ~182 KB | 3168×1344 (21:9) | Alternate / A-B test |
-| hero-poster4.webp | ~138 KB | 3168×1344 (21:9) | Alternate / A-B test |
-| hero-poster.webp | ~174 KB | 2752×1536 (~16:9) | Legacy (16:9 + wall sign) — backup |
+
+*(Alternates `hero-poster.webp`, `poster2`, `poster4` removed from repo — June 2026.)*
 
 ### Hero CSS (current)
 
@@ -110,15 +109,17 @@ assets/
 
 Site uses **1000×1500** WebP thumbs for scroll performance. Naming: add `-` before `.webp`; last file uses `--` (original already ends with `-`).
 
-| Gallery file (active) | Master (archive) | Dimensions (gallery) |
-|----------------------|------------------|----------------------|
-| `ALC  - Dec 2025 - Int - 3-.webp` | `… - 3.webp` | 1000×1500 |
-| `ALC  - Dec 2025 - Int - 9-.webp` | `… - 9.webp` | 1000×1500 |
-| `ALC  - Dec 2025 - Int - 7-.webp` | `… - 7.webp` | 1000×1500 |
-| `ALC  - Dec 2025 - Int - 16-.webp` | `… - 16.webp` | 1000×1500 |
-| `ALC  - Dec 2025 - Int - 19-.webp` | `… - 19.webp` | 1000×1500 |
-| `ALC  - Dec 2025 - Int - 21-.webp` | `… - 21.webp` | 1000×1500 |
-| `ALC  - Dec 2025 - Int --.webp` | `… - Int -.webp` | 1000×1500 |
+| Gallery file (active) | Dimensions |
+|----------------------|------------|
+| `ALC  - Dec 2025 - Int - 3-.webp` | 1000×1500 |
+| `ALC  - Dec 2025 - Int - 9-.webp` | 1000×1500 |
+| `ALC  - Dec 2025 - Int - 7-.webp` | 1000×1500 |
+| `ALC  - Dec 2025 - Int - 16-.webp` | 1000×1500 |
+| `ALC  - Dec 2025 - Int - 19-.webp` | 1000×1500 |
+| `ALC  - Dec 2025 - Int - 21-.webp` | 1000×1500 |
+| `ALC  - Dec 2025 - Int --.webp` | 1000×1500 |
+
+*(Full-res masters removed from repo — June 2026.)*
 
 **UI:** `.interior-gallery` — horizontal scroll + prev/next arrows + styled 3px scrollbar.  
 **Loading:** first 3 images `loading="eager"`, rest `lazy`.
@@ -144,7 +145,7 @@ All files use **`-` suffix** before `.webp` (web-optimized; masters removed).
 | **2500×1667** | `A la Carte - Nov 2025 - 35-.webp` — featured spread |
 | **1200×1800** | All other `Food2/*-.webp` (mosaic + swap options) |
 
-### Active in `index.html`
+### Active in `index.html` (desktop mosaic)
 
 | File | Section |
 |------|---------|
@@ -154,6 +155,12 @@ All files use **`-` suffix** before `.webp` (web-optimized; masters removed).
 | `ALC - Dec 2025 - EXT4-.webp` | Mosaic |
 | `ALC  - Dec 2025 - 7-.webp` | Mosaic |
 | `ALC  - Dec 2025 - 11-.webp` | Mosaic |
+
+### Mobile only (hidden on desktop ≥768px)
+
+| File | Section |
+|------|---------|
+| `ALC  - Dec 2025 - 12-.webp` | Mosaic 6th cell |
 
 ### Reserve (swap options, not in HTML)
 
@@ -165,12 +172,13 @@ All files use **`-` suffix** before `.webp` (web-optimized; masters removed).
 
 ---
 
-## `working/` (6 WebP)
+## `working/` (1 WebP)
 
 | File | Use |
 |------|-----|
 | **ALC0047 copy.webp** | ★ Community section |
-| Others | Reserve / swap |
+
+*(5 reserve files removed from repo — June 2026.)*
 
 ---
 
@@ -203,7 +211,9 @@ See `assets/Logo/README.md`.
 | hero-video.mp4 | Client TBD |
 | App Store / Google Play URLs | Placeholder "coming soon" |
 | Storefront exterior photo | Not in assets |
-| Netlify deploy + DNS | Not started |
+| Netlify deploy | ✓ Staging live — DNS pending |
+| Contact form | ✓ Netlify Forms + success modal |
+| Form notifications email | Configure in Netlify dashboard |
 | Logo rectangular crop | Recommended for header |
 | Interior thumb rename / cleanup | Optional phase 2 |
 | OG / Schema / Analytics | Phase 2 |
@@ -214,13 +224,13 @@ See `assets/Logo/README.md`.
 
 | Folder | Active in site | Notes |
 |--------|----------------|-------|
-| hero | 2 (+ alts) | poster3 + mobile |
-| interior | 7 gallery | + 7 masters archived |
-| Food | 5 in grid | + featured Food2 |
-| Food2 | 6 in site | |
+| hero | 2 | poster3 + mobile |
+| interior | 7 | thumbs only |
+| Food2 | 6 + 1 mobile | featured + mosaic |
+| Food | 0 | archive JPGs |
 | working | 1 | community |
-| **Code** | 6 HTML + CSS + JS | phase 1 complete |
+| **Code** | 6 HTML + CSS + JS | phase 1 deployed |
 
 ---
 
-*Internal — last updated June 2026 after phase 1 build.*
+*Internal — last updated June 2026 after Netlify deploy + form/modal updates. See `CHANGELOG.md`.*

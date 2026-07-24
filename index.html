@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Á La Carte Miami | Thoughtfully Prepared Food</title>
-  <meta name="description" content="Á La Carte Miami — organic, thoughtfully prepared food. Order online, visit Hallandale Beach, Kosher Certified by ORB.">
+  <title>A La Carte Miami | Thoughtfully Prepared Food</title>
+  <meta name="description" content="A La Carte Miami — organic, thoughtfully prepared food. Order online, visit Hallandale Beach, Kosher Certified by ORB.">
   <link rel="icon" href="/assets/favicon/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -20,7 +19,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <div aria-hidden="true"></div>
-      <a class="site-header__logo" href="/" aria-label="Á La Carte — Home">
+      <a class="site-header__logo" href="/" aria-label="A La Carte — Home">
         <img src="/assets/Logo/logo-white.png" alt="" width="180" height="48">
       </a>
       <div class="site-header__actions">
@@ -59,10 +58,22 @@
   <main id="main">
     <section class="hero" id="hero" aria-labelledby="hero-title">
       <div class="hero__media">
-        <picture class="hero__desktop">
-          <source type="image/webp" srcset="/assets/hero/hero-poster3.webp">
-          <img src="/assets/hero/hero-poster3.webp" alt="" width="3612" height="1344" fetchpriority="high">
-        </picture>
+        <div class="hero__desktop">
+          <video
+            class="hero__video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster="/assets/hero/hero-poster3.webp"
+            aria-hidden="true">
+            <source src="/assets/hero/hero-desktop.mp4" type="video/mp4">
+          </video>
+          <picture class="hero__desktop-fallback">
+            <source type="image/webp" srcset="/assets/hero/hero-poster3.webp">
+            <img src="/assets/hero/hero-poster3.webp" alt="" width="3612" height="1344" loading="lazy">
+          </picture>
+        </div>
         <div class="hero__mobile">
           <video
             class="hero__video"
@@ -72,11 +83,11 @@
             preload="none"
             poster="/assets/hero/hero-poster-mobile.webp"
             aria-hidden="true">
-            <source src="/assets/hero/LOOP.mp4" type="video/mp4">
+            <source src="/assets/hero/hero-mobile.mp4" type="video/mp4">
           </video>
           <picture class="hero__mobile-fallback">
             <source type="image/webp" srcset="/assets/hero/hero-poster-mobile.webp">
-            <img src="/assets/hero/hero-poster-mobile.webp" alt="" width="1536" height="2752">
+            <img src="/assets/hero/hero-poster-mobile.webp" alt="" width="1536" height="2752" loading="lazy">
           </picture>
         </div>
       </div>
@@ -85,7 +96,7 @@
         <p class="hero__location">
           <a href="#locations">Hallandale Beach, Florida</a>
         </p>
-        <h1 class="hero__title" id="hero-title">Á La Carte Miami</h1>
+        <h1 class="hero__title" id="hero-title">A La Carte Miami</h1>
         <h2 class="hero__subtitle">Thoughtfully prepared food you can feel good about</h2>
       </div>
       <div class="hero__cta container">
@@ -108,12 +119,12 @@
           <div class="split__media">
             <picture>
               <source type="image/webp" srcset="/assets/working/eatwell.webp">
-              <img src="/assets/working/eatwell.webp" alt="Fresh healthy meals at Á La Carte" width="1400" height="1782" loading="lazy">
+              <img src="/assets/working/eatwell.webp" alt="Fresh healthy meals at A La Carte" width="1400" height="1782" loading="lazy">
             </picture>
           </div>
           <div class="split__body">
             <p class="section__eyebrow" id="community-title">Community</p>
-            <h2 class="section__title">Join the Á La Carte community</h2>
+            <h2 class="section__title">Join the A La Carte community</h2>
             <p>Download our app to earn rewards, enjoy exclusive offers, and stay connected.</p>
             <div class="store-badges" role="group" aria-label="Mobile apps">
               <span class="store-badge" aria-disabled="true" aria-label="Download on the App Store — coming soon">
@@ -141,6 +152,65 @@
               </span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="highlights" aria-label="Highlights">
+      <div class="container">
+        <div class="carousel-gallery">
+          <button class="carousel-gallery__nav carousel-gallery__nav--prev" type="button" data-carousel-prev aria-label="Previous slide" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <div class="carousel-scroll" id="highlights-carousel" role="list" tabindex="0">
+            <article class="carousel-slide" role="listitem">
+              <div class="carousel-slide__media">
+                <img src="/assets/carousel/fresh-produce.webp" alt="Fresh produce at A La Carte" width="1080" height="1350" loading="eager">
+              </div>
+              <div class="carousel-slide__body">
+                <h3 class="carousel-slide__title">Fresh Produce</h3>
+                <p class="carousel-slide__text">Delivered fresh every morning.</p>
+              </div>
+            </article>
+            <article class="carousel-slide" role="listitem">
+              <div class="carousel-slide__media">
+                <img src="/assets/carousel/real-ingredients.webp" alt="Real ingredients at A La Carte" width="1080" height="1350" loading="eager">
+              </div>
+              <div class="carousel-slide__body">
+                <h3 class="carousel-slide__title">Real Ingredients</h3>
+                <p class="carousel-slide__text">Know exactly what you're eating.</p>
+              </div>
+            </article>
+            <article class="carousel-slide" role="listitem">
+              <div class="carousel-slide__media">
+                <img src="/assets/carousel/fish-based-menu.webp" alt="Fish-based menu at A La Carte" width="1080" height="1350" loading="lazy">
+              </div>
+              <div class="carousel-slide__body">
+                <h3 class="carousel-slide__title">Fish-Based Menu</h3>
+              </div>
+            </article>
+            <article class="carousel-slide" role="listitem">
+              <div class="carousel-slide__media">
+                <img src="/assets/carousel/made-to-order.webp" alt="Food made to order at A La Carte" width="1080" height="1350" loading="lazy">
+              </div>
+              <div class="carousel-slide__body">
+                <h3 class="carousel-slide__title">Made to Order</h3>
+                <p class="carousel-slide__text">Prepared fresh, just for you.</p>
+              </div>
+            </article>
+            <article class="carousel-slide" role="listitem">
+              <div class="carousel-slide__media">
+                <img src="/assets/carousel/every-bite-matters.webp" alt="Every bite matters at A La Carte" width="1080" height="1350" loading="lazy">
+              </div>
+              <div class="carousel-slide__body">
+                <h3 class="carousel-slide__title">Every Bite Matters</h3>
+                <p class="carousel-slide__text">Fresh ingredients. Bold flavor.</p>
+              </div>
+            </article>
+          </div>
+          <button class="carousel-gallery__nav carousel-gallery__nav--next" type="button" data-carousel-next aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -206,11 +276,45 @@
           <h2 class="section__title" id="interior-title">A calm place to gather</h2>
           <p class="section__lead">Minimal, warm interiors designed for wellness and connection.</p>
         </header>
-        <div class="interior-feature">
-          <picture>
-            <source type="image/webp" srcset="/assets/interior/ALC%20%20-%20Dec%202025%20-%20Int%20-%2019-.webp">
-            <img src="/assets/interior/ALC%20%20-%20Dec%202025%20-%20Int%20-%2019-.webp" alt="Café counter and dining space" width="1000" height="1500" loading="lazy">
-          </picture>
+        <div class="interior-gallery">
+          <button class="interior-gallery__nav interior-gallery__nav--prev" type="button" data-interior-prev aria-label="Previous image" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <div class="interior-scroll" id="interior-scroll" role="list" tabindex="0">
+            <div class="interior-scroll__item" role="listitem">
+              <picture>
+                <source type="image/webp" srcset="/assets/interior/1.webp">
+                <img src="/assets/interior/1.webp" alt="Dining area with banquette seating and arches" width="1080" height="1350" loading="eager">
+              </picture>
+            </div>
+            <div class="interior-scroll__item" role="listitem">
+              <picture>
+                <source type="image/webp" srcset="/assets/interior/2.webp">
+                <img src="/assets/interior/2.webp" alt="Soft light and warm tones in the café" width="1080" height="1350" loading="eager">
+              </picture>
+            </div>
+            <div class="interior-scroll__item" role="listitem">
+              <picture>
+                <source type="image/webp" srcset="/assets/interior/3.webp">
+                <img src="/assets/interior/3.webp" alt="Restaurant interior with natural wood details" width="1080" height="1350" loading="eager">
+              </picture>
+            </div>
+            <div class="interior-scroll__item" role="listitem">
+              <picture>
+                <source type="image/webp" srcset="/assets/interior/4.webp">
+                <img src="/assets/interior/4.webp" alt="Seating area with indoor greenery" width="1080" height="1350" loading="lazy">
+              </picture>
+            </div>
+            <div class="interior-scroll__item" role="listitem">
+              <picture>
+                <source type="image/webp" srcset="/assets/interior/5.webp">
+                <img src="/assets/interior/5.webp" alt="Full view of A La Carte dining room" width="1080" height="1350" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <button class="interior-gallery__nav interior-gallery__nav--next" type="button" data-interior-next aria-label="Next image">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -222,27 +326,33 @@
           <h2 class="section__title" id="locations-title">Our Locations</h2>
         </header>
         <div class="locations">
-          <div>
-            <article class="location-card">
-              <h3>Hallandale Beach</h3>
-              <p>613 W Hallandale Beach Blvd<br>Hallandale Beach, FL 33009</p>
-              <a href="https://maps.google.com/?q=613+W+Hallandale+Beach+Blvd+Hallandale+Beach+FL+33009" target="_blank" rel="noopener noreferrer">Get directions</a>
-            </article>
-            <article class="location-card location-card--soon" style="margin-top:1rem">
-              <h3>Bay Harbor</h3>
-              <p>Coming Soon<br>1088 Kane Concourse<br>Bay Harbor Islands, FL 33154</p>
-              <a href="https://maps.google.com/?q=1088+Kane+Concourse,+Bay+Harbor+Islands,+FL+33154" target="_blank" rel="noopener noreferrer">Get directions</a>
-            </article>
-          </div>
-          <div class="map-wrap">
-            <iframe
-              title="Á La Carte Hallandale Beach on Google Maps"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=613+W+Hallandale+Beach+Blvd,+Hallandale+Beach,+FL+33009&output=embed"
-              allowfullscreen>
-            </iframe>
-          </div>
+          <article class="location-card">
+            <div class="location-card__head">
+              <h3 class="location-card__title">Hallandale Beach</h3>
+            </div>
+            <address class="location-card__address">
+              <span class="location-card__line">613 W Hallandale Beach Blvd</span>
+              <span class="location-card__line">Hallandale Beach, FL 33009</span>
+            </address>
+            <a class="btn btn--outline location-card__cta" href="https://maps.google.com/?q=613+W+Hallandale+Beach+Blvd+Hallandale+Beach+FL+33009" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Get directions
+            </a>
+          </article>
+          <article class="location-card location-card--soon">
+            <div class="location-card__head">
+              <h3 class="location-card__title">Bay Harbor</h3>
+              <span class="location-card__status">Coming Soon</span>
+            </div>
+            <address class="location-card__address">
+              <span class="location-card__line">1088 Kane Concourse</span>
+              <span class="location-card__line">Bay Harbor Islands, FL 33154</span>
+            </address>
+            <a class="btn btn--outline location-card__cta" href="https://maps.google.com/?q=1088+Kane+Concourse,+Bay+Harbor+Islands,+FL+33154" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Get directions
+            </a>
+          </article>
         </div>
       </div>
     </section>
@@ -300,7 +410,7 @@
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="site-footer__logo" href="/" aria-label="Á La Carte">
+      <a class="site-footer__logo" href="/" aria-label="A La Carte">
         <img src="/assets/Logo/logo-white.png" alt="" width="160" height="42">
       </a>
       <div class="site-footer__social">
@@ -316,7 +426,7 @@
         <a href="/accessibility">Accessibility</a>
         <a data-order-link href="#">Order Online</a>
       </nav>
-      <p class="site-footer__copy">&copy; <span id="year"></span> Á La Carte Miami. All rights reserved.</p>
+      <p class="site-footer__copy">&copy; <span id="year"></span> A La Carte Miami. All rights reserved.</p>
     </div>
   </footer>
 
