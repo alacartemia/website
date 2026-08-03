@@ -102,12 +102,36 @@
     return true;
   }
 
+  function heroReduceMotion() {
+    return document.documentElement.classList.contains("a11y-reduce-motion");
+  }
+
+  function restartHeroVideo() {
+    if (!heroVideo || heroReduceMotion()) return;
+
+    heroVideo.loop = true;
+    heroVideo.muted = true;
+
+    if (
+      heroVideo.ended ||
+      (Number.isFinite(heroVideo.duration) &&
+        heroVideo.duration > 0 &&
+        heroVideo.currentTime >= heroVideo.duration - 0.05)
+    ) {
+      heroVideo.currentTime = 0;
+    }
+
+    const playPromise = heroVideo.play();
+    if (playPromise?.catch) {
+      playPromise.catch(() => {});
+    }
+  }
+
   function syncHeroVideo() {
     if (!heroVideo) return;
-    const reduceMotion = document.documentElement.classList.contains("a11y-reduce-motion");
-    setHeroSource();
+    const sourceChanged = setHeroSource();
 
-    if (reduceMotion) {
+    if (heroReduceMotion()) {
       heroVideo.pause();
       heroVideo.setAttribute("poster", heroPoster());
       heroVideo.classList.add("is-ready");
@@ -115,9 +139,11 @@
     }
 
     heroVideo.removeAttribute("poster");
-    heroVideo.classList.remove("is-ready");
-    heroVideo.muted = true;
-    heroVideo.play().catch(() => {});
+    heroVideo.loop = true;
+    if (sourceChanged) {
+      heroVideo.classList.remove("is-ready");
+    }
+    restartHeroVideo();
   }
 
   heroVideo?.addEventListener("playing", () => {
@@ -126,11 +152,33 @@
   });
 
   heroVideo?.addEventListener("canplay", () => {
-    if (
-      !document.documentElement.classList.contains("a11y-reduce-motion") &&
-      !heroVideo.paused
-    ) {
-      heroVideo.classList.add("is-ready");
+    if (heroReduceMotion() || heroVideo.paused) return;
+    heroVideo.classList.add("is-ready");
+  });
+
+  heroVideo?.addEventListener("ended", () => {
+    heroVideo.currentTime = 0;
+    restartHeroVideo();
+  });
+
+  const heroSection = document.getElementById("hero");
+  if (heroVideo && heroSection && "IntersectionObserver" in window) {
+    const heroObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            restartHeroVideo();
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    heroObserver.observe(heroSection);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      restartHeroVideo();
     }
   });
 
