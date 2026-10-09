@@ -1,8 +1,7 @@
 (() => {
   "use strict";
 
-  const TOAST_ORDER_URL =
-    "https://order.toasttab.com/online/a-la-carte-613-w-hallandale-beach-blvd";
+  const TOAST_ORDER_URL = "https://order.alacartemia.com/";
 
   const A11Y_KEY = "alc-a11y";
 

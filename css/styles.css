@@ -619,6 +619,18 @@ html.a11y-reduce-motion .hero__video {
   min-height: 2.875rem;
 }
 
+a.store-badge--link {
+  opacity: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+a.store-badge--link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
 .store-badge__icon {
   flex-shrink: 0;
   width: 1.625rem;
